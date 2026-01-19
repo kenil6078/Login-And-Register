@@ -16,7 +16,7 @@ const existsuser = await User.findOne({ email });
   const user = await User.create({
     name,
     email,
-    password: Hashpassword,
+    password:Hashpassword,
   });
   await user.save();
   res.status(201).json({ message: "User Registered Successfully" , user });
