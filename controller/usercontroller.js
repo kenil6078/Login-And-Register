@@ -35,5 +35,20 @@ const login = async (req, res) => {
   res.status(200).json({ message: "Login Successful" , user });
 };
 
+const UpdateUser = async (req,res)=>{
+  const { name, email, password } = req.body;
+  const userId = req.params.id;
+  if (!name || !email || !password)
+    return res.status(201).json({ message: "All Fields Are Required" });
+  const user = await User.findByIdAndUpdate(userId, {
+    name,
+    email,
+    password
+  }, { new: true });
+  if (!user)
+    return res.status(201).json({ message: "User Not Found" });
+  res.status(200).json({ message: "User Updated Successfully", user });
+}
 
-module.exports = { register, login };
+
+module.exports = { register, login, UpdateUser };
